@@ -23,5 +23,9 @@ export const tableHeads = [
   {
     id: "6",
     title: "Comments"
+  },
+  {
+    id: "7",
+    title: "Action"
   }
 ];
