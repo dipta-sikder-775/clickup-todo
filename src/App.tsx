@@ -18,9 +18,9 @@ import { useMemo } from "react";
 import { changeMainTodoIndex } from "./app/features/todo/slice";
 import { getTableRows } from "./app/features/todo/utils";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
+import StatusButton from "./components/elements/Button/StatusButton";
 import useRowDndContext from "./components/elements/Dnd/useRowDndContext";
 import Table from "./components/ui/Table";
-import StatusButton from "./components/elements/Button/StatusButton";
 
 //         {row?.name}
 //       </Align>
@@ -85,7 +85,7 @@ const App = () => {
   return (
     <main className="flex flex-col gap-3 px-2 py-4">
       <section>
-        <div>
+        <div className="ml-10">
           <StatusButton
             data={{
               status: "TODO",
@@ -104,7 +104,7 @@ const App = () => {
 
       {!!inProgressTableRows?.length && (
         <section>
-          <div>
+          <div className="ml-10">
             <StatusButton
               data={{
                 status: "IN_PROGRESS",
@@ -124,7 +124,7 @@ const App = () => {
 
       {!!doneTableRows?.length && (
         <section>
-          <div>
+          <div className="ml-10">
             <StatusButton
               data={{
                 status: "DONE",
