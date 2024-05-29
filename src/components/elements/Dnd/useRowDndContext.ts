@@ -28,10 +28,7 @@ const useRowDndContext = <T>({
   uniqueKey,
   handleReorder,
 }: IUseRowDndContextProps<T>) => {
-  // const dispatch = useAppDispatch();
-  // const [data, setData] = useState<T[]>(() => dataSource); //{}[]
-
-  const dataIds = useMemo<UniqueIdentifier[]>( // string[]
+  const dataIds = useMemo<UniqueIdentifier[]>(
     () =>
       (dataSource ?? [])?.map(
         (dt) => String(dt?.[uniqueKey]) as UniqueIdentifier,
@@ -39,21 +36,11 @@ const useRowDndContext = <T>({
     [dataSource, uniqueKey],
   );
 
-  // useEffect(() => {
-  //   if (dataSource) setData(dataSource);
-  // }, [dataSource]);
-
   // reorder rows after drag & drop
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
     if (active && over && active.id !== over.id) {
-      // setData((data) => {
-      //   const oldIndex = dataIds.indexOf(active.id);
-      //   const newIndex = dataIds.indexOf(over.id);
-      //   return arrayMove(data, oldIndex, newIndex); //this is just a splice util
-      // });
       const oldIndex = dataIds.indexOf(active.id);
       const newIndex = dataIds.indexOf(over.id);
-      // dispatch(changeMainTodoIndex({ oldIndex, newIndex }));
       handleReorder?.({ newId: over.id, oldId: active.id, newIndex, oldIndex });
     }
   };
@@ -78,7 +65,6 @@ const useRowDndContext = <T>({
     },
 
     data: {
-      // reOrderedDataToRender: data,
       reOrderedDataToRender: dataSource,
     },
   };

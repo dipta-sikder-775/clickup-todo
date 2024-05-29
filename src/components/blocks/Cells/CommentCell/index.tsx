@@ -86,7 +86,6 @@ const CommentCard = ({
                 "!block !opacity-100": editCommentData?.id === comment?.id,
               })}
             >
-              {/* <CommentCardAction /> */}
               <CommentCardAction
                 comment={comment}
                 mainId={mainId}
@@ -212,9 +211,9 @@ const CommentCell = ({
                     comment={comment}
                     mainId={mainId}
                     subId={subId}
-                    key={comment?.id}
                     handleToggleEditMode={handleToggleEditMode}
                     editCommentData={editCommentData}
+                    key={comment?.id}
                   />
                 );
               })}

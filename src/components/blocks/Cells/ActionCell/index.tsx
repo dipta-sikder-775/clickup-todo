@@ -15,7 +15,6 @@ interface IActionCellProps {
 
 const ActionCell = ({ mainId, subId, className }: IActionCellProps) => {
   const dispatch = useAppDispatch();
-  // console.log({ mainId, subId });
 
   const handleDelete =
     ({ mainId, subId }: IActionCellProps) =>

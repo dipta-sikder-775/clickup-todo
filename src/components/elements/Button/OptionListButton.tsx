@@ -34,7 +34,7 @@ const OptionListButton = ({
   return (
     <button
       className={cn(
-        "flex w-full items-center justify-between !p-2 transition-all duration-100 ease-in-out hover:rounded-md hover:bg-bg-gray-priority-option-hover",
+        "flex w-full items-center justify-between border-none !p-2 outline-none transition-all duration-100 ease-in-out hover:rounded-md hover:bg-bg-gray-priority-option-hover focus:outline-none",
         className,
       )}
       {...rest}

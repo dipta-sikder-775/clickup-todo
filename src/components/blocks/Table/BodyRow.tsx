@@ -17,6 +17,9 @@ import DueDateCell from "../Cells/DueDateCell";
 import PriorityCell from "../Cells/PriorityCell";
 import StatusCell from "../Cells/StatusCell";
 import StatusIconCell from "../Cells/StatusIconCell";
+import { FaPen } from "react-icons/fa";
+import { FaPencil } from "react-icons/fa6";
+import { GoPencil } from "react-icons/go";
 
 interface IBodyRowProps {
   row: TTableRow;
@@ -82,16 +85,23 @@ const BodyRow = ({ row, mainId, subId }: IBodyRowProps) => {
 
           <StatusIconCell status={row?.status} mainId={mainId} subId={subId} />
 
-          {row?.name}
+          <div className="flex items-center justify-between gap-0.5">
+            <input
+              className="w-full flex-1 border-none bg-transparent outline-none focus-within:outline-none focus:outline-none"
+              type="text"
+              value={row?.name}
+            />
 
-          <span className="block"></span>
+            <div className="block">
+              <div className="cursor-pointer rounded p-1 hover:bg-bg-gray-action-button">
+                <GoPencil className="h-[10px] w-[10px] text-text-gray-status " />
+              </div>
+            </div>
+          </div>
         </Align>
       </div>
 
-      <div
-        className="td "
-        // style={{ minWidth: cellWidths["assignee"] }}
-      >
+      <div className="td ">
         <AssigneeCell
           className="min-w-[90px]"
           assignee={row?.assignee}
@@ -100,10 +110,7 @@ const BodyRow = ({ row, mainId, subId }: IBodyRowProps) => {
         />
       </div>
 
-      <div
-        className="td"
-        // style={{ minWidth: cellWidths["dueDate"] }}
-      >
+      <div className="td">
         <DueDateCell
           className="min-w-[120px]"
           dueDate={row?.dueDate}
@@ -112,10 +119,7 @@ const BodyRow = ({ row, mainId, subId }: IBodyRowProps) => {
         />
       </div>
 
-      <div
-        className="td"
-        // style={{ minWidth: cellWidths["priority"] }}
-      >
+      <div className="td">
         <PriorityCell
           className="min-w-[100px]"
           priority={row?.priority}
@@ -124,10 +128,7 @@ const BodyRow = ({ row, mainId, subId }: IBodyRowProps) => {
         />
       </div>
 
-      <div
-        className="td"
-        // style={{ minWidth: cellWidths["status"] }}
-      >
+      <div className="td">
         <StatusCell
           className="min-w-[120px]"
           status={row?.status}
@@ -136,10 +137,7 @@ const BodyRow = ({ row, mainId, subId }: IBodyRowProps) => {
         />
       </div>
 
-      <div
-        className="td "
-        // style={{ minWidth: cellWidths["comments"] }}
-      >
+      <div className="td ">
         <CommentCell
           className="min-w-[80px]"
           comments={row?.comments}
@@ -148,10 +146,7 @@ const BodyRow = ({ row, mainId, subId }: IBodyRowProps) => {
         />
       </div>
 
-      <div
-        className="td flex min-w-[60px] items-center justify-center"
-        // style={{ minWidth: cellWidths["actions"] }}
-      >
+      <div className="td flex min-w-[60px] items-center justify-center">
         <ActionCell
           className="flex min-w-[60px] items-center justify-center"
           mainId={mainId}

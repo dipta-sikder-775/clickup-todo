@@ -106,6 +106,7 @@ const StatusOptions = ({ mainId, subId }: IStatusOptionsProps) => {
                 content: statusOption?.rightSection,
               },
             }}
+            key={statusOption?.key}
           />
         );
       })}

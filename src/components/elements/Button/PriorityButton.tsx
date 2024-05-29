@@ -17,9 +17,6 @@ interface IPriorityButtonProps
   };
 }
 
-// children: LuMessageCircle,
-// className: "rotate-[270deg]",
-
 const PriorityButton = ({
   data: { text, selectedKey },
   className,

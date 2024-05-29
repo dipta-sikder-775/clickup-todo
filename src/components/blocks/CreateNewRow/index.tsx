@@ -30,7 +30,6 @@ const CreateNewRow = ({ mainId, placeholder }: ICreateNewRowProps) => {
           addTodo({
             todo: {
               name: ref.current.value,
-              // comments: [],
             },
             mainTodoId: mainId,
           }),
@@ -86,7 +85,6 @@ const CreateNewRow = ({ mainId, placeholder }: ICreateNewRowProps) => {
                       addTodo({
                         todo: {
                           name: ref.current.value,
-                          // comments: [],
                         },
                         mainTodoId: mainId,
                       }),

@@ -35,8 +35,7 @@ const manageStopPropagation =
   (e: TEvents) => {
     e.stopPropagation();
     e.preventDefault();
-    // if (props?.enableStopPropagation) {
-    // }
+
     if (!props.isDisabled) {
       props?.func?.(e);
     }
@@ -67,7 +66,6 @@ const PopoverCell = ({ popOver, target }: IPopoverCellProps) => {
             isDisabled: target?.disabled,
             enableStopPropagation: target?.stopPropagation,
           })}
-          // className="w-full h-full"
         >
           <CellWrapper className={cn(target?.className)}>
             {target?.content}

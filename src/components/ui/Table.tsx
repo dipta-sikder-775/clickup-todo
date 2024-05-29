@@ -1,11 +1,3 @@
-import { Collapse } from "@mantine/core";
-import { Fragment } from "react";
-import CreateNewRow from "../blocks/CreateNewRow";
-import BodyRow from "../blocks/Table/BodyRow";
-import HeadRow from "../blocks/Table/HeadRow";
-import DragAndDropContext from "../elements/Dnd/DragAndDropContext";
-import SortableDataContext from "../elements/Dnd/SortableDataContext";
-import { TTableRows } from "../../app/features/todo/types";
 import {
   CollisionDetection,
   DragEndEvent,
@@ -15,6 +7,14 @@ import {
   UniqueIdentifier,
 } from "@dnd-kit/core";
 import { SortingStrategy } from "@dnd-kit/sortable";
+import { Collapse } from "@mantine/core";
+import { Fragment } from "react";
+import { TTableRows } from "../../app/features/todo/types";
+import CreateNewRow from "../blocks/CreateNewRow";
+import BodyRow from "../blocks/Table/BodyRow";
+import HeadRow from "../blocks/Table/HeadRow";
+import DragAndDropContext from "../elements/Dnd/DragAndDropContext";
+import SortableDataContext from "../elements/Dnd/SortableDataContext";
 
 interface ITableProps {
   tableRows: TTableRows;
@@ -45,7 +45,6 @@ const Table = ({
 
           <div className="tbody">
             <SortableDataContext sortableContextProps={sortableContextProps}>
-              {/* map table row */}
               {tableRows?.map((row) => {
                 return (
                   <Fragment key={row.id}>

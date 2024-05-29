@@ -15,9 +15,6 @@ interface ICommentButtonProps
   };
 }
 
-// children: LuMessageCircle,
-// className: "rotate-[270deg]",
-
 const CommentButton = ({
   data: { text },
   className,

@@ -45,7 +45,6 @@ const DueDateCell = ({
       },
     });
   };
-  // console.log({ mainId, subId });
 
   const { content, status } = humanizeDate(dueDate);
 
@@ -63,8 +62,7 @@ const DueDateCell = ({
         ),
         className: className,
       }}
-      // target={!!dueDate && humanizeDate(dueDate)}
-      // children: CiCalendarDate,
+
       popOver={{
         content: (
           <Stack gap="xs">

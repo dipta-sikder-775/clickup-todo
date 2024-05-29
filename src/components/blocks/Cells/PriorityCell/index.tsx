@@ -15,11 +15,6 @@ const PriorityCell = ({
   subId,
   className,
 }: IPriorityCellProps) => {
-  // const { subTodoData, mainTodoData } = useUpdateTodo({
-  //   mainId,
-  //   subId,
-  // });
-  // const selectedKey = mainTodoData?.priority?.key || subTodoData?.priority?.key;
   const selectedKey = priority?.key;
 
   return (
@@ -30,8 +25,6 @@ const PriorityCell = ({
         ),
         className,
       }}
-      // children: !selectedKey ? TbFlag3 : TbFlag3Filled,
-      // className: cn(getColorClassFromKey(selectedKey)),
       popOver={{
         width: 220,
         content: (

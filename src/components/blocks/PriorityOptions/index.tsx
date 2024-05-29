@@ -167,8 +167,8 @@ const PriorityOptions = ({
         },
       });
     };
-  // console.log({ mainId, subId });
-  return (
+
+    return (
     <div className="flex flex-col gap-2">
       {getStatusOptionsData(priority).map((statusOption, i) => {
         const isSelected = getIsSelected({
@@ -227,6 +227,7 @@ const PriorityOptions = ({
                 content: statusOption.rightSection,
               },
             }}
+            key={i}
           />
         );
       })}

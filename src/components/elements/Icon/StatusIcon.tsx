@@ -31,7 +31,6 @@ const StatusIcon = ({
   tooltip,
   onClickIcon,
 }: IStatusIconProps) => {
-  // console.log({ status, className, tooltip });
 
   if (status === "TODO") {
     const content = (

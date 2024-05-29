@@ -33,8 +33,7 @@ const manageStopPropagation =
   (e: TEvents) => {
     e.stopPropagation();
     e.preventDefault();
-    // if (props?.enableStopPropagation) {
-    // }
+    
     if (!props.isDisabled) {
       props?.func?.(e);
     }

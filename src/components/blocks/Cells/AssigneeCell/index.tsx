@@ -35,7 +35,6 @@ const AssigneeCell = ({
     () => {
       dispatch(toggleSelectedUser({ mainId, subId, assignee }));
     };
-  // console.log({ mainId, subId });
 
   return (
     <PopoverCell
@@ -47,7 +46,7 @@ const AssigneeCell = ({
         ),
         className,
       }}
-      // children: IoMdPersonAdd,
+
       popOver={{
         content: (
           <div>
