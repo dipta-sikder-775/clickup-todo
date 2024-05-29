@@ -37,9 +37,25 @@ export const getTableRows = () =>
       })
       .sort((a, b) => a.index - b.index);
 
+    const todoTableRows = tableRows.filter(
+      (row) => row?.status?.key === "TODO",
+    );
+    const inProgressTableRows = tableRows.filter(
+      (row) => row?.status?.key === "IN_PROGRESS",
+    );
+    const doneTableRows = tableRows.filter(
+      (row) => row?.status?.key === "DONE",
+    );
+
     const isSelectedData = isSelected(tableRowsObj);
 
-    return { tableRows, ...isSelectedData };
+    return {
+      tableRows,
+      todoTableRows,
+      inProgressTableRows,
+      doneTableRows,
+      ...isSelectedData,
+    };
   });
 
 // const arr = [

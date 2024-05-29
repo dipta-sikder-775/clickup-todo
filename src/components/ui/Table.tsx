@@ -1,8 +1,8 @@
 import { Collapse } from "@mantine/core";
 import { Fragment } from "react";
 import CreateNewRow from "../blocks/CreateNewRow";
-import BodyRow from "../blocks/NewTable/BodyRow";
-import HeadRow from "../blocks/NewTable/HeadRow";
+import BodyRow from "../blocks/Table/BodyRow";
+import HeadRow from "../blocks/Table/HeadRow";
 import DragAndDropContext from "../elements/Dnd/DragAndDropContext";
 import SortableDataContext from "../elements/Dnd/SortableDataContext";
 import { TTableRows } from "../../app/features/todo/types";

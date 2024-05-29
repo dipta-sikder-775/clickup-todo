@@ -20,6 +20,7 @@ import { getTableRows } from "./app/features/todo/utils";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import useRowDndContext from "./components/elements/Dnd/useRowDndContext";
 import Table from "./components/ui/Table";
+import StatusButton from "./components/elements/Button/StatusButton";
 
 //         {row?.name}
 //       </Align>
@@ -70,7 +71,8 @@ import Table from "./components/ui/Table";
 const App = () => {
   const dispatch = useAppDispatch();
   const selectTableRows = useMemo(getTableRows, []);
-  const { tableRows } = useAppSelector(selectTableRows);
+  const { tableRows, todoTableRows, doneTableRows, inProgressTableRows } =
+    useAppSelector(selectTableRows);
 
   const { dndContextProps, sortableContextProps } = useRowDndContext({
     dataSource: tableRows,
@@ -81,12 +83,60 @@ const App = () => {
   });
 
   return (
-    <main>
-      <Table
-        dndContextProps={dndContextProps}
-        sortableContextProps={sortableContextProps}
-        tableRows={tableRows}
-      />
+    <main className="flex flex-col gap-3 py-4 px-2">
+      <section>
+        <div>
+          <StatusButton
+            data={{
+              status: "TODO",
+              text: "Todo",
+            }}
+            className="w-fit"
+          />
+        </div>
+
+        <Table
+          dndContextProps={dndContextProps}
+          sortableContextProps={sortableContextProps}
+          tableRows={todoTableRows}
+        />
+      </section>
+
+     {!!inProgressTableRows?.length&& <section>
+        <div>
+          <StatusButton
+            data={{
+              status: "IN_PROGRESS",
+              text: "Todo",
+            }}
+            className="w-fit"
+          />
+        </div>
+
+        <Table
+          dndContextProps={dndContextProps}
+          sortableContextProps={sortableContextProps}
+          tableRows={inProgressTableRows}
+        />
+      </section>}
+
+      {!!doneTableRows?.length&&<section>
+        <div>
+          <StatusButton
+            data={{
+              status: "DONE",
+              text: "Todo",
+            }}
+            className="w-fit"
+          />
+        </div>
+
+        <Table
+          dndContextProps={dndContextProps}
+          sortableContextProps={sortableContextProps}
+          tableRows={doneTableRows}
+        />
+      </section>}
     </main>
   );
 };
