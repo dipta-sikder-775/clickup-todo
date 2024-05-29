@@ -83,7 +83,7 @@ const App = () => {
   });
 
   return (
-    <main className="flex flex-col gap-3 py-4 px-2">
+    <main className="flex flex-col gap-3 px-2 py-4">
       <section>
         <div>
           <StatusButton
@@ -102,41 +102,45 @@ const App = () => {
         />
       </section>
 
-     {!!inProgressTableRows?.length&& <section>
-        <div>
-          <StatusButton
-            data={{
-              status: "IN_PROGRESS",
-              text: "Todo",
-            }}
-            className="w-fit"
+      {!!inProgressTableRows?.length && (
+        <section>
+          <div>
+            <StatusButton
+              data={{
+                status: "IN_PROGRESS",
+                text: "Todo",
+              }}
+              className="w-fit"
+            />
+          </div>
+
+          <Table
+            dndContextProps={dndContextProps}
+            sortableContextProps={sortableContextProps}
+            tableRows={inProgressTableRows}
           />
-        </div>
+        </section>
+      )}
 
-        <Table
-          dndContextProps={dndContextProps}
-          sortableContextProps={sortableContextProps}
-          tableRows={inProgressTableRows}
-        />
-      </section>}
+      {!!doneTableRows?.length && (
+        <section>
+          <div>
+            <StatusButton
+              data={{
+                status: "DONE",
+                text: "Todo",
+              }}
+              className="w-fit"
+            />
+          </div>
 
-      {!!doneTableRows?.length&&<section>
-        <div>
-          <StatusButton
-            data={{
-              status: "DONE",
-              text: "Todo",
-            }}
-            className="w-fit"
+          <Table
+            dndContextProps={dndContextProps}
+            sortableContextProps={sortableContextProps}
+            tableRows={doneTableRows}
           />
-        </div>
-
-        <Table
-          dndContextProps={dndContextProps}
-          sortableContextProps={sortableContextProps}
-          tableRows={doneTableRows}
-        />
-      </section>}
+        </section>
+      )}
     </main>
   );
 };
