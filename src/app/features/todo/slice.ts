@@ -227,30 +227,6 @@ export const initialState: ITodoInitialState = {
       isSelected: false,
       isCollapsed: false,
       subtasks: {
-        "n3-1": {
-          id: "n2-1",
-          index: 0,
-          name: "N2 Subtask 1",
-          assignee: [
-            {
-              id: "1",
-              name: "John Doe",
-              email: "",
-            },
-          ],
-          dueDate: "2021-12-31",
-          priority: {
-            key: "HIGH",
-            color: "#FF0000",
-            customName: "High",
-          },
-          status: {
-            key: "TODO",
-            color: "#FF0000",
-            customName: "To Do",
-          },
-          comments: [{ id: "1zjnnfsjbuhbauh", text: "This is a comment" }],
-        },
         "n3-2": {
           id: "n3-2",
           index: 1,

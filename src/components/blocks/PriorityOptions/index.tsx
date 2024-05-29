@@ -168,7 +168,7 @@ const PriorityOptions = ({
       });
     };
 
-    return (
+  return (
     <div className="flex flex-col gap-2">
       {getStatusOptionsData(priority).map((statusOption, i) => {
         const isSelected = getIsSelected({

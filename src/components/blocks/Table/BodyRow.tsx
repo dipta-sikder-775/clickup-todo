@@ -20,6 +20,7 @@ import StatusIconCell from "../Cells/StatusIconCell";
 import { FaPen } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 import { GoPencil } from "react-icons/go";
+import InlineEdit from "../InlineEdit";
 
 interface IBodyRowProps {
   row: TTableRow;
@@ -85,7 +86,7 @@ const BodyRow = ({ row, mainId, subId }: IBodyRowProps) => {
 
           <StatusIconCell status={row?.status} mainId={mainId} subId={subId} />
 
-          <div className="flex items-center justify-between gap-0.5">
+          {/* <div className="flex items-center justify-between gap-0.5">
             <input
               className="w-full flex-1 border-none bg-transparent outline-none focus-within:outline-none focus:outline-none"
               type="text"
@@ -97,7 +98,8 @@ const BodyRow = ({ row, mainId, subId }: IBodyRowProps) => {
                 <GoPencil className="h-[10px] w-[10px] text-text-gray-status " />
               </div>
             </div>
-          </div>
+          </div> */}
+          <InlineEdit row={row} mainId={mainId} subId={subId} />
         </Align>
       </div>
 
