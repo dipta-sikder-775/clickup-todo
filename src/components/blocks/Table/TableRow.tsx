@@ -1,69 +1,39 @@
-// import { Checkbox, Table, Tooltip } from "@mantine/core";
-// import PriorityCell from "../PriorityCell";
-// import StatusCell from "../StatusCell";
-// import CommentCell from "../CommentCell";
-// import ActionCell from "../ActionCell";
-// import DueDateCell from "../DueDateCell";
-// import AssigneeCell from "../AssigneeCell";
-// import { IoRadioButtonOn } from "react-icons/io5";
-// import cn from "../../../utils/cn";
-// import { useAppDispatch } from "../../../app/hooks";
-// import { toggleSelectTodo } from "../../../app/features/todo/utils";
+// import { type Row, flexRender } from "@tanstack/react-table";
+// import { CSSProperties } from "react";
+// import { TTableRow } from "../../../app/features/todo/types";
+// import { useSortable } from "@dnd-kit/sortable";
+// import { CSS } from "@dnd-kit/utilities";
 
-// const TableRow = () => {
-//     const dispatch = useAppDispatch();
+// const TableRow = ({ row }: { row: Row<TTableRow> }) => {
+//   const { transform, transition, setNodeRef, isDragging } = useSortable({
+//     id: row.original.id!,
+//   });
+
+//   const style: CSSProperties = {
+//     transform: CSS.Transform.toString(transform), //let dnd-kit do its thing
+//     transition: transition,
+//     opacity: isDragging ? 0.8 : 1,
+//     zIndex: isDragging ? 1 : 0,
+//     position: "relative",
+//   };
+
 //   return (
-//     <Table.Tr key={row?.id}>
-//       <Table.Td>
-//         <Checkbox
-//           color="#544dc9"
-//           size="xs"
-//           aria-label="Select row"
-//           checked={row.isSelected}
-//           onChange={() => dispatch(toggleSelectTodo(row?.id as string))}
-//         />
-//       </Table.Td>
-
-//       <Table.Td>
-//         <Align className="justify-normal gap-2">
-//           <Tooltip label={row?.status?.customName}>
-//             <span>
-//               <IoRadioButtonOn
-//                 className={cn("h-4 w-4", {
-//                   "text-[#228be6]": true,
-//                 })}
-//               />
-//             </span>
-//           </Tooltip>
-
-//           {row?.name}
-//         </Align>
-//       </Table.Td>
-
-//       <Table.Td>
-//         <AssigneeCell assignee={row?.assignee} mainId={row?.id} />
-//       </Table.Td>
-
-//       <Table.Td>
-//         <DueDateCell dueDate={row?.dueDate} mainId={row?.id} />
-//       </Table.Td>
-
-//       <Table.Td>
-//         <PriorityCell priority={row?.priority} mainId={row?.id} />
-//       </Table.Td>
-
-//       <Table.Td>
-//         <StatusCell status={row?.status} mainId={row?.id} />
-//       </Table.Td>
-
-//       <Table.Td>
-//         <CommentCell comments={row?.comments} mainId={row?.id} />
-//       </Table.Td>
-
-//       <Table.Td>
-//         <ActionCell mainId={row?.id} />
-//       </Table.Td>
-//     </Table.Tr>
+//     // connect row ref to dnd-kit, apply important styles
+//     <div
+//       className="tr group/tableRow flex w-full items-center justify-start border-b border-solid border-border-gray-2 last:!border-b-0 hover:bg-bg-gray-hover-body"
+//       ref={setNodeRef}
+//       style={style}
+//     >
+//       {row?.getVisibleCells()?.map((cell) => (
+//         <div
+//           className="td"
+//           key={cell.id}
+//           style={{ width: cell.column.getSize() }}
+//         >
+//           {flexRender(cell.column.columnDef.cell, cell.getContext())}
+//         </div>
+//       ))}
+//     </div>
 //   );
 // };
 

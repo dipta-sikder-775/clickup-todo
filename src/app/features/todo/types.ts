@@ -29,6 +29,7 @@ export type TComment = {
   text?: string;
   author?: TAssign;
   likes?: number;
+  date?: string | number | Dayjs | Date | null | undefined;
 };
 
 export type TTag = {
@@ -39,6 +40,7 @@ export type TTag = {
 
 export interface ITableRow {
   id?: string | number;
+  index: number;
   isSelected?: boolean;
   isCollapsed?: boolean;
   tags?: TTag[];

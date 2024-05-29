@@ -1,19 +1,21 @@
 import { Button, Stack, Text } from "@mantine/core";
-import { BsThreeDots } from "react-icons/bs";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { removeTodo } from "../../../app/features/todo/utils";
-import { useAppDispatch } from "../../../app/hooks";
-import PopOverCellIcon from "../../elements/Align/Icon/PopOverCellIcon";
+import { removeTodo } from "../../../../app/features/todo/slice";
+import { useAppDispatch } from "../../../../app/hooks";
+import ActionsButton from "../../../elements/Button/ActionsButton";
+import PopOverCellIcon from "../../../elements/Icon/PopOverCellIcon";
 import PopoverCell from "../PopoverCell";
+import cn from "../../../../utils/cn";
 
 interface IActionCellProps {
   mainId?: string | number;
   subId?: string | number;
+  className?: string;
 }
 
-const ActionCell = ({ mainId, subId }: IActionCellProps) => {
+const ActionCell = ({ mainId, subId, className }: IActionCellProps) => {
   const dispatch = useAppDispatch();
-  console.log({ mainId, subId });
+  // console.log({ mainId, subId });
 
   const handleDelete =
     ({ mainId, subId }: IActionCellProps) =>
@@ -24,7 +26,8 @@ const ActionCell = ({ mainId, subId }: IActionCellProps) => {
   return (
     <PopoverCell
       target={{
-        content: <BsThreeDots/>,
+        content: <ActionsButton />,
+        className: cn("!border-[0px] !p-0 ", className),
       }}
       popOver={{
         width: 200,

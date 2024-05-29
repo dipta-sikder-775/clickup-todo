@@ -20,7 +20,7 @@ const Align = ({
         direction,
         layoutMethod,
       }),
-    [align, justify, direction, layoutMethod]
+    [align, justify, direction, layoutMethod],
   );
 
   return (

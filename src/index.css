@@ -1,8 +1,8 @@
-:root{
-    --checkbox-size: {
-        width: 1.5rem;
-        height: 1.5rem;
-    };
+:root {
+  --checkbox-size: {
+    width: 1.5rem;
+    height: 1.5rem;
+  };
 }
 
 @tailwind base;

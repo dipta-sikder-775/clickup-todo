@@ -1,10 +1,9 @@
-import { Button, Stack } from "@mantine/core";
-import { FaCheck } from "react-icons/fa";
-import { IoMdCheckmarkCircle } from "react-icons/io";
-import { IoRadioButtonOn } from "react-icons/io5";
+import { UnstyledButton } from "@mantine/core";
 import { TStatus, TStatusKey } from "../../../app/features/todo/types";
 import useUpdateTodo from "../../../hooks/useUpdateTodo";
-import PopOverCellIcon from "../../elements/Align/Icon/PopOverCellIcon";
+import cn from "../../../utils/cn";
+import StatusIcon from "../../elements/Icon/StatusIcon";
+import OptionListButton from "../../elements/Button/OptionListButton";
 
 type TStatusOptionsData = {
   key: TStatusKey;
@@ -19,44 +18,24 @@ const statusOptionsData: TStatusOptionsData = [
   {
     color: "gray",
     justify: "start",
-    leftSection: <PopOverCellIcon>{IoRadioButtonOn}</PopOverCellIcon>,
-    rightSection: (
-      <PopOverCellIcon className="h-3 w-3 text-[#544dc9]">
-        {FaCheck}
-      </PopOverCellIcon>
-    ),
+    leftSection: <StatusIcon status={"TODO"} />,
+    rightSection: <StatusIcon status="CHECK_MARK" />,
     children: "Todo",
     key: "TODO",
   },
   {
     color: "dark",
     justify: "start",
-    leftSection: (
-      <PopOverCellIcon className="text-[#1090e0]">
-        {IoRadioButtonOn}
-      </PopOverCellIcon>
-    ),
-    rightSection: (
-      <PopOverCellIcon className="h-3 w-3 text-[#544dc9]">
-        {FaCheck}
-      </PopOverCellIcon>
-    ),
+    leftSection: <StatusIcon status={"IN_PROGRESS"} />,
+    rightSection: <StatusIcon status={"CHECK_MARK"} />,
     children: "In Progress",
     key: "IN_PROGRESS",
   },
   {
     color: "gray",
     justify: "start",
-    leftSection: (
-      <PopOverCellIcon className="text-[#008844]">
-        {IoMdCheckmarkCircle}
-      </PopOverCellIcon>
-    ),
-    rightSection: (
-      <PopOverCellIcon className="h-3 w-3 text-[#544dc9]">
-        {FaCheck}
-      </PopOverCellIcon>
-    ),
+    leftSection: <StatusIcon status={"DONE"} />,
+    rightSection: <StatusIcon status={"CHECK_MARK"} />,
     children: "Completed",
     key: "DONE",
   },
@@ -70,10 +49,11 @@ export interface IStatusOptionsProps {
 type THandleStatusChangeArgs = IStatusOptionsProps & TStatus;
 
 const StatusOptions = ({ mainId, subId }: IStatusOptionsProps) => {
-  const { updateTodoData, getIsSelected, allTodos } = useUpdateTodo({
-    mainId,
-    subId,
-  });
+  const { updateTodoData, getIsSelected, allTodos, mainTodoData, subTodoData } =
+    useUpdateTodo({
+      mainId,
+      subId,
+    });
 
   const handleStatusChange =
     ({ mainId, subId, key, customName }: THandleStatusChangeArgs) =>
@@ -82,6 +62,10 @@ const StatusOptions = ({ mainId, subId }: IStatusOptionsProps) => {
         mainId,
         subId,
         updatedTodo: {
+          index:
+            mainId && subId
+              ? subTodoData?.index ?? 0
+              : mainTodoData?.index ?? 0,
           status: {
             key,
             customName,
@@ -91,37 +75,41 @@ const StatusOptions = ({ mainId, subId }: IStatusOptionsProps) => {
     };
 
   return (
-    <Stack gap="xs" align="stretch" justify="start">
-      {statusOptionsData.map((statusOption) => (
-        <Button
-          key={statusOption.key}
-          size="xs"
-          variant="subtle"
-          color={statusOption.color}
-          justify={statusOption.justify}
-          leftSection={statusOption.leftSection}
-          rightSection={
-            getIsSelected({
-              allTodos,
-              optionKey: statusOption.key,
+    <div className="flex w-full flex-col gap-2">
+      {statusOptionsData?.map((statusOption) => {
+        const isSelected = getIsSelected({
+          allTodos,
+          optionKey: statusOption?.key,
+          mainId,
+          subId,
+          checkingFor: "status",
+        });
+
+        return (
+          <OptionListButton
+            onClick={handleStatusChange({
               mainId,
               subId,
-              checkingFor: "status",
-            })
-              ? statusOption.rightSection
-              : undefined
-          }
-          onClick={handleStatusChange({
-            mainId,
-            subId,
-            key: statusOption.key,
-            customName: statusOption.children,
-          })}
-        >
-          {statusOption.children}
-        </Button>
-      ))}
-    </Stack>
+              key: statusOption?.key,
+              customName: statusOption?.children,
+            })}
+            data={{
+              children: {
+                content: statusOption?.children,
+                className: "text-text-gray-status",
+              },
+              leftSection: {
+                content: statusOption?.leftSection,
+              },
+              isSelected,
+              rightSection: {
+                content: statusOption?.rightSection,
+              },
+            }}
+          />
+        );
+      })}
+    </div>
   );
 };
 

@@ -1,31 +1,30 @@
-
 export const tableHeads = [
   {
     id: "1",
-    title: "Name"
+    title: "Name",
   },
   {
     id: "2",
-    title: "Assignee"
+    title: "Assignee",
   },
   {
     id: "3",
-    title: "Due Date"
+    title: "Due Date",
   },
   {
     id: "4",
-    title: "Priority"
+    title: "Priority",
   },
   {
     id: "5",
-    title: "Status"
+    title: "Status",
   },
   {
     id: "6",
-    title: "Comments"
+    title: "Comments",
   },
   {
     id: "7",
-    title: "Action"
-  }
+    title: "Action",
+  },
 ];

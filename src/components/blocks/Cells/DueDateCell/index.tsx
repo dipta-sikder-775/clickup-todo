@@ -1,15 +1,16 @@
 import { Stack } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { Dayjs } from "dayjs";
-import { CiCalendarDate } from "react-icons/ci";
-import useUpdateTodo from "../../../hooks/useUpdateTodo";
-import { humanizeDate } from "../../../utils/time";
+import useUpdateTodo from "../../../../hooks/useUpdateTodo";
+import { humanizeDate } from "../../../../utils/time";
+import IconOrContentButton from "../../../elements/Button/IconOrContentButton";
 import PopoverCell from "../PopoverCell";
 
 interface IDueDateCellProps {
   dueDate?: string | number | Dayjs | Date | null | undefined;
   mainId?: string | number;
   subId?: string | number;
+  className?: string;
 }
 
 type THandleDateChangeArgs = {
@@ -18,8 +19,13 @@ type THandleDateChangeArgs = {
   dueDate: string | number | Dayjs | Date | null | undefined;
 };
 
-const DueDateCell = ({ dueDate, mainId, subId }: IDueDateCellProps) => {
-  const { updateTodoData } = useUpdateTodo({
+const DueDateCell = ({
+  dueDate,
+  mainId,
+  subId,
+  className,
+}: IDueDateCellProps) => {
+  const { updateTodoData, mainTodoData, subTodoData } = useUpdateTodo({
     mainId,
     subId,
   });
@@ -33,20 +39,32 @@ const DueDateCell = ({ dueDate, mainId, subId }: IDueDateCellProps) => {
       mainId,
       subId,
       updatedTodo: {
+        index:
+          mainId && subId ? subTodoData?.index ?? 0 : mainTodoData?.index ?? 0,
         dueDate,
       },
     });
   };
   // console.log({ mainId, subId });
 
+  const { content, status } = humanizeDate(dueDate);
+
   return (
     <PopoverCell
       target={{
-        content: !!dueDate && humanizeDate(dueDate),
-        icon: {
-          children: CiCalendarDate,
-        },
+        content: (
+          <IconOrContentButton
+            data={{
+              buttonFor: "due-date",
+              content,
+              status,
+            }}
+          />
+        ),
+        className: className,
       }}
+      // target={!!dueDate && humanizeDate(dueDate)}
+      // children: CiCalendarDate,
       popOver={{
         content: (
           <Stack gap="xs">

@@ -1,11 +1,58 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        text: {
+          "gray-1": "#656f7d",
+          "gray-2": "#87909e",
+          "gray-status": "#4f5762",
+          "black-1": "#2a2e34",
+          green: "#008844",
+          red: "#b13a41",
+          yellow: "#ae8013",
+        },
+        bg: {
+          paste: "#1090e0",
+          "paste-hover": "#0F89D5",
+          gray: "#DCDEE1",
+          "gray-hover": "#DCDEE1",
+          green: "#008141",
+          "green-hover": "#008141",
+          violet: "#7f77f1",
+          violetHover: "#5C52ED",
+          "violet-disabled": "#ccc9fa",
+          "violet-2": "#5f55ee",
+          "violet-2-hover": "#544DC9",
+          "gray-hover-header": "#E8EAED",
+          "gray-hover-body": "#F7F8F8",
+          "green-active": "#1ad67b",
+          "violet-avatar": "#7b68ee",
+          "gray-avatar-cross": "#979797",
+          "gray-action-button": "#2a2e3419",
+          "gray-priority-option-hover": "#f0f1f3",
+          "violet-like": "#E5E4FC",
+          "violet-like-hover": "#E5E4FC",
+        },
+        icon: {
+          blue: "#4466ff",
+          gray: "#87909e",
+          yellow: "#cf940a",
+          red: "#b13a41",
+          "gray-2": "#4F5762",
+          "yellow-like": "#FCDA68",
+          violet: "#544DC9",
+          paste: "#1090e0",
+          green: "#008844",
+        },
+        border: {
+          gray: "#ADB3BD",
+          "gray-2": "#E8EAED",
+          "violet-like": "#7f77f1",
+        },
+      },
+    },
   },
   plugins: [],
-}
+};

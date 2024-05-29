@@ -1,9 +1,10 @@
+import { updateTodo } from "../app/features/todo/slice";
 import {
   ITableRow,
   TPriorityKey,
   TStatusKey,
 } from "../app/features/todo/types";
-import { selectTodo, updateTodo } from "../app/features/todo/utils";
+import { selectTodo } from "../app/features/todo/utils";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 type TUpdateTodoDataArgs = {
@@ -98,7 +99,7 @@ const useUpdateTodo = ({ mainId, subId }: TUseUpdateTodo = {}) => {
     mainTodoData: mainId ? allTodos?.[mainId!] : undefined,
     subTodoData:
       mainId && subId
-        ? allTodos?.[mainId!]?.subtasks?.[subId!] ?? {}
+        ? allTodos?.[mainId!]?.subtasks?.[subId!] ?? ({} as ITableRow)
         : undefined,
   };
 };

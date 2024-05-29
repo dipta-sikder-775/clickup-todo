@@ -1,10 +1,11 @@
-import { Button, Stack } from "@mantine/core";
 import { FaCheck } from "react-icons/fa";
+import { GrClear } from "react-icons/gr";
 import { TbFlag3Filled } from "react-icons/tb";
 import { TPriority, TPriorityKey } from "../../../app/features/todo/types";
 import useUpdateTodo from "../../../hooks/useUpdateTodo";
 import cn from "../../../utils/cn";
-import PopOverCellIcon from "../../elements/Align/Icon/PopOverCellIcon";
+import OptionListButton from "../../elements/Button/OptionListButton";
+import PopOverCellIcon from "../../elements/Icon/PopOverCellIcon";
 
 type TPriorityCompareInput = {
   key?: TPriorityKey | null | undefined;
@@ -15,9 +16,10 @@ type TPriorityOption = {
   color: string;
   justify: string;
   leftSection: JSX.Element;
-  rightSection: JSX.Element;
+  rightSection?: JSX.Element;
   children: string;
   key: TPriorityKey | null | undefined;
+  rowAbove?: boolean;
 };
 
 type THandlePriorityChangeArgs = {
@@ -115,6 +117,18 @@ const getStatusOptionsData = (
       children: "Low",
       key: "LOW",
     },
+    {
+      color: "gray",
+      justify: "start",
+      leftSection: (
+        <PopOverCellIcon className="h-3.5 w-3.5 text-icon-gray-2">
+          {GrClear}
+        </PopOverCellIcon>
+      ),
+      rowAbove: true,
+      children: "Clear",
+      key: "LOW",
+    },
   ];
 };
 
@@ -129,10 +143,11 @@ const PriorityOptions = ({
   subId,
   priority,
 }: IPriorityOptionsProps) => {
-  const { updateTodoData, getIsSelected, allTodos } = useUpdateTodo({
-    mainId,
-    subId,
-  });
+  const { updateTodoData, getIsSelected, allTodos, mainTodoData, subTodoData } =
+    useUpdateTodo({
+      mainId,
+      subId,
+    });
 
   const handlePriorityChange =
     ({ mainId, subId, key, customName }: THandlePriorityChangeArgs) =>
@@ -141,6 +156,10 @@ const PriorityOptions = ({
         mainId,
         subId,
         updatedTodo: {
+          index:
+            mainId && subId
+              ? subTodoData?.index ?? 0
+              : mainTodoData?.index ?? 0,
           priority: {
             key,
             customName,
@@ -148,40 +167,70 @@ const PriorityOptions = ({
         },
       });
     };
-  console.log({ mainId, subId });
+  // console.log({ mainId, subId });
   return (
-    <Stack gap="xs" align="stretch" justify="start">
-      {getStatusOptionsData(priority).map((statusOption) => (
-        <Button
-          size="xs"
-          variant="subtle"
-          color={statusOption.color}
-          justify={statusOption.justify}
-          leftSection={statusOption.leftSection}
-          // rightSection={statusOption.rightSection}
-          rightSection={
-            getIsSelected({
-              allTodos,
-              optionKey: statusOption.key,
+    <div className="flex flex-col gap-2">
+      {getStatusOptionsData(priority).map((statusOption, i) => {
+        const isSelected = getIsSelected({
+          allTodos,
+          optionKey: statusOption.key,
+          mainId,
+          subId,
+          checkingFor: "priority",
+        });
+
+        if (statusOption?.rowAbove) {
+          return (
+            <div className="mt-2" key={i}>
+              <div className="mb-2 w-full border-b border-solid border-b-border-gray-2" />
+              <OptionListButton
+                onClick={handlePriorityChange({
+                  mainId,
+                  subId,
+                  key: undefined,
+                  customName: "",
+                })}
+                data={{
+                  children: {
+                    content: statusOption.children,
+                  },
+                  leftSection: {
+                    content: statusOption.leftSection,
+                  },
+                  isSelected: false,
+                  rightSection: {
+                    content: statusOption.rightSection,
+                  },
+                }}
+              />
+            </div>
+          );
+        }
+
+        return (
+          <OptionListButton
+            onClick={handlePriorityChange({
               mainId,
               subId,
-              checkingFor: "priority",
-            })
-              ? statusOption.rightSection
-              : undefined
-          }
-          onClick={handlePriorityChange({
-            mainId,
-            subId,
-            key: statusOption.key,
-            customName: statusOption.children,
-          })}
-          key={statusOption?.key}
-        >
-          {statusOption.children}
-        </Button>
-      ))}
-    </Stack>
+              key: statusOption.key,
+              customName: statusOption.children,
+            })}
+            data={{
+              children: {
+                content: statusOption.children,
+              },
+              leftSection: {
+                content: statusOption.leftSection,
+              },
+              isSelected,
+              rightSection: {
+                content: statusOption.rightSection,
+              },
+            }}
+          />
+        );
+      })}
+    </div>
   );
 };
 
