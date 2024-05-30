@@ -35,6 +35,8 @@ const ActionsButton = ({
       >
         {data?.icon ? data?.icon : BsThreeDots}
       </PopOverCellIcon>
+
+      <span className="sr-only">action button</span>
     </span>
   );
 };

@@ -13,15 +13,15 @@ const StatusIconCell = ({ status, mainId, subId }: IStatusIconCellProps) => {
     <PopoverCell
       target={{
         content: (
-          <StatusIcon
-            status={status?.key}
-            tooltip={{
-              text: status?.customName,
-              active: true,
-              className: cn({ "ml-11": mainId && subId }),
-              requiredParringAndBgColor: true,
-            }}
-          />
+            <StatusIcon
+              status={status?.key}
+              tooltip={{
+                text: status?.customName,
+                active: true,
+                className: cn({ "ml-11": mainId && subId }),
+                requiredParringAndBgColor: true,
+              }}
+            />
         ),
         className: "!border-[0px] !p-0",
       }}

@@ -17,9 +17,6 @@ import DueDateCell from "../Cells/DueDateCell";
 import PriorityCell from "../Cells/PriorityCell";
 import StatusCell from "../Cells/StatusCell";
 import StatusIconCell from "../Cells/StatusIconCell";
-import { FaPen } from "react-icons/fa";
-import { FaPencil } from "react-icons/fa6";
-import { GoPencil } from "react-icons/go";
 import InlineEdit from "../InlineEdit";
 
 interface IBodyRowProps {
@@ -44,61 +41,58 @@ const BodyRow = ({ row, mainId, subId }: IBodyRowProps) => {
           <div {...controlElementProps} className="flex items-center gap-1">
             <RiDraggable className="h-4 w-4 cursor-pointer select-none fill-icon-gray text-icon-gray text-inherit opacity-0 transition-all duration-100 ease-linear group-hover/tableBodyRow:opacity-100" />
 
-            <CheckboxButton
-              stopPropagation
-              checked={row?.isSelected}
-              onClick={() =>
-                dispatch(
-                  toggleSelectTodo({
-                    mainTodoId: mainId as string,
-                    subTodoId: subId,
-                  }),
-                )
-              }
-              className={cn(
-                "opacity-0 transition-all duration-100 ease-linear group-hover/tableBodyRow:opacity-100",
-                {
-                  "opacity-100": row?.isSelected,
-                },
-              )}
-            />
-
-            {mainId && !subId && (
-              <IoMdArrowDropdown
+            <div className="m-0 block p-0">
+              <CheckboxButton
+                stopPropagation
+                checked={row?.isSelected}
+                onClick={() =>
+                  dispatch(
+                    toggleSelectTodo({
+                      mainTodoId: mainId as string,
+                      subTodoId: subId,
+                    }),
+                  )
+                }
                 className={cn(
-                  "h-4 w-4 transition-all duration-100 ease-linear",
+                  "opacity-0 transition-all duration-100 ease-linear group-hover/tableBodyRow:opacity-100",
                   {
-                    "rotate-[-90deg] transform": !row?.isCollapsed,
+                    "opacity-100": row?.isSelected,
                   },
                 )}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  dispatch(toggleCollapseTodo(row.id!));
-                }}
-                onPointerDown={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                }}
               />
+
+              <span className="sr-only">checkbox to select a table row</span>
+            </div>
+
+            {mainId && !subId && (
+              <div className="m-0 block p-0">
+                <IoMdArrowDropdown
+                  className={cn(
+                    "h-4 w-4 transition-all duration-100 ease-linear",
+                    {
+                      "rotate-[-90deg] transform": !row?.isCollapsed,
+                    },
+                  )}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dispatch(toggleCollapseTodo(row.id!));
+                  }}
+                  onPointerDown={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                />
+
+                <span className="sr-only">
+                  expend and collapse a table sub row
+                </span>
+              </div>
             )}
           </div>
 
           <StatusIconCell status={row?.status} mainId={mainId} subId={subId} />
 
-          {/* <div className="flex items-center justify-between gap-0.5">
-            <input
-              className="w-full flex-1 border-none bg-transparent outline-none focus-within:outline-none focus:outline-none"
-              type="text"
-              value={row?.name}
-            />
-
-            <div className="block">
-              <div className="cursor-pointer rounded p-1 hover:bg-bg-gray-action-button">
-                <GoPencil className="h-[10px] w-[10px] text-text-gray-status " />
-              </div>
-            </div>
-          </div> */}
           <InlineEdit row={row} mainId={mainId} subId={subId} />
         </Align>
       </div>

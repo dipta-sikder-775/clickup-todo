@@ -31,7 +31,6 @@ const StatusIcon = ({
   tooltip,
   onClickIcon,
 }: IStatusIconProps) => {
-
   if (status === "TODO") {
     const content = (
       <PopOverCellIcon
@@ -54,7 +53,10 @@ const StatusIcon = ({
         label={tooltip?.text || "Todo"}
         onClick={(e) => onClickIcon?.({ e, status })}
       >
-        <span>{content}</span>
+        <span>
+          {content}
+          <span className="sr-only">status icon button</span>
+        </span>
       </Tooltip>
     ) : (
       content
@@ -81,7 +83,10 @@ const StatusIcon = ({
         label={tooltip?.text || "In Progress"}
         onClick={(e) => onClickIcon?.({ e, status })}
       >
-        <span>{content}</span>
+        <span>
+          {content}
+          <span className="sr-only">status icon button</span>
+        </span>
       </Tooltip>
     ) : (
       content
@@ -108,7 +113,10 @@ const StatusIcon = ({
         label={tooltip?.text || "Done"}
         onClick={(e) => onClickIcon?.({ e, status })}
       >
-        <span>{content}</span>
+        <span>
+          {content}
+          <span className="sr-only">status icon button</span>
+        </span>
       </Tooltip>
     ) : (
       content
