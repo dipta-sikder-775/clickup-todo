@@ -82,6 +82,8 @@ const IconOrContentButton = ({
           })}
         >
           {data?.content}
+
+          <span className="sr-only">due date button</span>
         </span>
       ) : (
         <span className="flex flex-wrap items-center justify-center gap-1">
@@ -108,6 +110,8 @@ const IconOrContentButton = ({
                 />
               );
             })}
+
+          <span className="sr-only">assignee button</span>
         </span>
       )}
     </span>

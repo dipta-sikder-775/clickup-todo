@@ -70,6 +70,8 @@ const PopoverCell = ({ popOver, target }: IPopoverCellProps) => {
           <CellWrapper className={cn(target?.className)}>
             {target?.content}
           </CellWrapper>
+
+          <span className="sr-only">table cell button</span>
         </UnstyledButton>
       </Popover.Target>
 

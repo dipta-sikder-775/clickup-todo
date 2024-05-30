@@ -38,6 +38,8 @@ const PriorityButton = ({
       <span className={cn("text-sm font-normal text-text-black-1")}>
         {text}
       </span>
+
+      <span className="sr-only">priority button</span>
     </span>
   );
 };

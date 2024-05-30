@@ -69,6 +69,8 @@ const OptionListButton = ({
       >
         {isSelected && rightSection?.content}
       </span>
+
+      <span className="sr-only">option button</span>
     </button>
   );
 };
